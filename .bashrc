@@ -13,6 +13,13 @@ alias rcc='code ~/.bashrc'
 alias rcs='source ~/.bashrc'
 
 #
+# global variables
+str_path_config="/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/25bash-alias-custom/config"
+str_file_ipaddr="$str_path_config/ipaddr.txt"
+str_file_localdir="$str_path_config/localdir.txt"
+str_file_remotedir="$str_path_config/remotedir.txt"
+
+#
 # external functions
 rc-code() {
     cancel=true
@@ -21,6 +28,21 @@ rc-code() {
     if [ ! -z "$rcfile" ]; then
         echo "code $HOME/src/$rcfile"
         code $HOME/src/$rcfile
+        cancel=false
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+rc-config() {
+    cancel=true
+    ls "$str_path_config"
+    rcfile=$(inp-rcfile)
+    if [ ! -z "$rcfile" ]; then
+        echo "code $str_path_config/$rcfile"
+        code "$str_path_config/$rcfile"
         cancel=false
     fi
     if $cancel; then

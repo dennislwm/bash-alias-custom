@@ -6,6 +6,8 @@ alias tfd='terraform destroy'
 alias tfi='terraform init'
 alias tfp='terraform plan'
 alias tfs='terraform show'
+alias tfsl='terraform state list'
+alias tfsr='terraform state rm'
 
 #
 # internal aliases
@@ -54,9 +56,33 @@ tf-destroy() {
         echo "done"
     fi
 }
+tf-import() {
+    cancel=true
+    echo "Import Ssh Key from existing tf:"
+    echo "  Use tfs to find the id of digitalocean_ssh_key.objSshKey"
+    tfid=$(inp-tfid)
+    if [ ! -z "$tfid" ]; then
+        echo "terraform import digitalocean_ssh_key.objSshKey $tfid"
+        terraform import digitalocean_ssh_key.objSshKey $tfid
+        cancel=false
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
 
 #
 # inputs
+inp-tfid() {
+    read -p "Enter id OR BLANK to quit: " id
+    if [ -z $id ]; then
+        echo ""
+    else
+        echo $id
+    fi
+}
 inp-tfmod() {
     read -p "Enter module OR BLANK to quit: " mod
     if [ -z $mod ]; then

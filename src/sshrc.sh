@@ -1,36 +1,32 @@
 #
 # internal aliases
+alias bash_ip='cat-file "$str_file_ipaddr"'
 alias bash_scpdir='scp -F c:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1 -r'
 alias bash_ssh='ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1'
+alias bash_sshaws='ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_aws01'
 alias bash_scp='scp -F c:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1'
-
-#
-# internal variables
-str_file_ipaddr='/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/19dscode/config/ipaddr.txt'
-str_file_localdir='/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/19dscode/config/localdir.txt'
-str_file_remotedir='/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/19dscode/config/remotedir.txt'
 
 #
 # external functions
 scp-dn() {
     cancel=true
     cat-file "$str_file_ipaddr"
-    name=$(inp-name)
-    ipaddr=${!name}
-    echo "User" $ipaddr
-    if [ ! -z "$ipaddr" ]; then
+    name1=$(inp-name)
+    if [ ! -z "$name1" ]; then
+        ipaddr=${!name1}
+        echo "User" $ipaddr
         cat-file "$str_file_remotedir"
-        name=$(inp-name)
-        remotedir=${!name}
-        echo "User" $remotedir
-        if [ ! -z "$remotedir" ]; then
+        name2=$(inp-name)
+        if [ ! -z "$name2" ]; then
+            remotedir=${!name2}
+            echo "User" $remotedir
             localdir="d:\\docker"
             echo "bash_scpdir root@$ipaddr:$remotedir $localdir"
             bash_scpdir root@$ipaddr:$remotedir $localdir
-            cancel=false
+            cancel=""
         fi
     fi
-    if $cancel; then
+    if [ ! -z $cancel ]; then
         echo "user cancel"
     else
         echo "done"
@@ -52,10 +48,10 @@ scp-up() {
             echo "bash_scpdir $localdir root@$ipaddr:$remotedir"
             cd "d:\\docker"
             bash_scpdir $localdir root@$ipaddr:$remotedir
-            cancel=false
+            cancel=""
         fi
     fi
-    if $cancel; then
+    if [ ! -z $cancel ]; then
         echo "user cancel"
     else
         echo "done"
@@ -69,9 +65,28 @@ ssh-root() {
     echo "User" $ipaddr
     if [ ! -z "$ipaddr" ]; then
         bash_ssh "root@"$ipaddr
-        cancel=false
+        cancel=""
     fi
-    if $cancel; then
+    if [ ! -z $cancel ]; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+ssh-aws() {
+    cancel=true
+    cat-file "$str_file_ipaddr"
+    name=$(inp-name)
+    ipaddr=${!name}
+    if [ ! -z "$ipaddr" ]; then
+        echo "User"
+        user=$(inp-name)
+        if [ ! -z "$name" ]; then
+            bash_sshaws "$user@"$ipaddr
+            cancel=""
+        fi
+    fi
+    if [ ! -z $cancel ]; then
         echo "user cancel"
     else
         echo "done"
@@ -87,7 +102,6 @@ cat-file()
     if [[ -f $file ]]; then
         source "$file"
         awk -v prefix=" " '{print prefix $0}' "$file"
-        cancel=false
     fi
 }
 inp-name() {
