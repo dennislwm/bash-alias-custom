@@ -38,6 +38,25 @@ git-clone() {
         echo "done"
     fi
 }
+#
+# Example: curl -X POST -H 'Authorization: token d5aefe02f68f5c375e416293f35dd573546e6a57' -d '{"name":"chrome-ext-code"}' https://api.github.com/user/repos
+git-create() {
+    cancel=true
+    echo "This script creates a remote Git repository for the current user"
+    cat-file "$str_file_config"
+    name=$(inp-name)
+    if [ ! -z "$name" ]; then
+        data=$( printf '{"name":"%s"}' "$name" )
+        echo "curl -X POST -H 'Authorization: token $githubtoken' -d '$data' https://api.github.com/user/repos"
+        eval "curl -X POST -H 'Authorization: token $githubtoken' -d '$data' https://api.github.com/user/repos"
+        cancel=false
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
 git-new() {
     cancel=true
     localpath="/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/"
@@ -74,8 +93,8 @@ git-new() {
             gc
             echo "gro git@$remotepath/$remotegit.git"
             gro git@$remotepath/$remotegit.git
-            echo "gpo"
-            gpo
+            echo "gpom"
+            gpom
             cancel=false
         fi
     fi
@@ -199,6 +218,23 @@ assert-isgit() {
 }
 inp-confirm() {
     read -p "Enter yes to confirm; OR BLANK to quit: " name
+    if [ -z $name ]; then
+        echo ""
+    else
+        echo $name
+    fi
+}
+cat-config()
+{
+    file=$str_file_config
+    echo "Reading file" "$file"
+    if [[ -f $file ]]; then
+        source "$file"
+        awk -v prefix=" " '{print prefix $0}' "$file"
+    fi
+}
+inp-name() {
+    read -p "Enter name; OR BLANK to quit: " name
     if [ -z $name ]; then
         echo ""
     else

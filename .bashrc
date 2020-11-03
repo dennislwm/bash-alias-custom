@@ -15,6 +15,7 @@ alias rcs='source ~/.bashrc'
 #
 # global variables
 str_path_config="/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/25bash-alias-custom/config"
+str_file_config="$str_path_config/config.txt"
 str_file_ipaddr="$str_path_config/ipaddr.txt"
 str_file_localdir="$str_path_config/localdir.txt"
 str_file_remotedir="$str_path_config/remotedir.txt"
