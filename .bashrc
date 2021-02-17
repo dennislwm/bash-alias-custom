@@ -1,3 +1,5 @@
+PS1="\[\033[36m\]\u\[\033[m\]:\[\033[33;1m\]\w\[\033[m\]\$ "
+
 #
 # source sub-scripts
 source $HOME/src/dockerrc.sh
@@ -13,17 +15,8 @@ alias rcc='code ~/.bashrc'
 alias rcs='source ~/.bashrc'
 
 #
-# global variables
-str_path_config="/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/25bash-alias-custom/config"
-str_file_config="$str_path_config/config.txt"
-str_file_ipaddr="$str_path_config/ipaddr.txt"
-str_file_localdir="$str_path_config/localdir.txt"
-str_file_remotedir="$str_path_config/remotedir.txt"
-
-#
 # external functions
-rc-code() {
-    cancel=true
+rc-code() { cancel=true;
     ls $HOME/src
     rcfile=$(inp-rcfile)
     if [ ! -z "$rcfile" ]; then
@@ -37,26 +30,10 @@ rc-code() {
         echo "done"
     fi
 }
-rc-config() {
-    cancel=true
-    ls "$str_path_config"
-    rcfile=$(inp-rcfile)
-    if [ ! -z "$rcfile" ]; then
-        echo "code $str_path_config/$rcfile"
-        code "$str_path_config/$rcfile"
-        cancel=false
-    fi
-    if $cancel; then
-        echo "user cancel"
-    else
-        echo "done"
-    fi
-}
 
 #
 # inputs
-inp-rcfile() {
-    read -p "Enter filename OR BLANK to quit: " rcfile
+inp-rcfile() { read -p "Enter filename OR BLANK to quit: " rcfile;
     if [ -z $rcfile ]; then
         echo ""
     else
