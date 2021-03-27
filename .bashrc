@@ -5,6 +5,7 @@ PS1="\[\033[36m\]\u\[\033[m\]:\[\033[33;1m\]\w\[\033[m\]\$ "
 source $HOME/src/dockerrc.sh
 source $HOME/src/gitrc.sh
 source $HOME/src/helprc.sh
+source $HOME/src/ledgerrc.sh
 source $HOME/src/sshrc.sh
 source $HOME/src/terraformrc.sh
 source $HOME/src/wprc.sh
