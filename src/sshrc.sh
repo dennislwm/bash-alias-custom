@@ -1,25 +1,19 @@
 #!/bin/bash
 
+#
 # internal aliases
-#alias bash_scpdir='scp -F c:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1 -r'
-#alias bash_ssh='ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1'
-#alias bash_scp='scp -F c:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1'
-alias bash_scpdir='scp -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1 -r'
-alias bash_ssh='ssh -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1'
-alias bash_scp='scp -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1'
-
-#
-# internal variables
-#str_file_ipaddr='/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/19dscode/config/ipaddr.txt'
-#str_file_localdir='/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/19dscode/config/localdir.txt'
-#str_file_remotedir='/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/19dscode/config/remotedir.txt'
-str_file_ipaddr='/Users/dennislee/fx-git-pull/02bash-alias-custom/config/ipaddr.txt'
-str_file_localdir='/Users/dennislee/fx-git-pull/02bash-alias-custom/config/localdir.txt'
-str_file_remotedir='/Users/dennislee/fx-git-pull/02bash-alias-custom/config/remotedir.txt'
-
-#
-# base
-str_docker_localdir='/Users/dennislee/docker/'
+alias bash_ip='cat-file "$str_file_ipaddr"'
+if [ "$str_os" == "WINDOWS" ]; then
+    alias bash_scpdir='scp -F c:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1 -r'
+    alias bash_ssh='ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1'
+    alias bash_sshaws='ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_aws01'
+    alias bash_scp='scp -F c:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1'
+else
+    alias bash_scpdir='scp -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1 -r'
+    alias bash_ssh='ssh -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1'
+    alias bash_sshaws='ssh -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_aws01'
+    alias bash_scp='scp -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1'
+fi
 
 #
 # external functions
@@ -80,6 +74,25 @@ ssh-root() {
     if [ ! -z "$ipaddr" ]; then
         bash_ssh root@"$ipaddr"
         cancel=""
+    fi
+    if [ ! -z $cancel ]; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+ssh-aws() {
+    cancel=true
+    cat-file "$str_file_ipaddr"
+    name=$(inp-name)
+    ipaddr=${!name}
+    if [ ! -z "$ipaddr" ]; then
+        echo "User"
+        user=$(inp-name)
+        if [ ! -z "$name" ]; then
+            bash_sshaws "$user@"$ipaddr
+            cancel=""
+        fi
     fi
     if [ ! -z $cancel ]; then
         echo "user cancel"

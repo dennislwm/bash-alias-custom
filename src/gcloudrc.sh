@@ -39,6 +39,7 @@ alias gccogr='gcloud config get-value compute/region'
 alias gccogz='gcloud config get-value compute/zone'
 alias gccosr='gcloud config set compute/region'
 alias gccosz='gcloud config set compute/zone $ZONE'
+alias gciakc='gcloud iam service-accounts keys create <JSON-KEY-FILE> --iam-account <SERVICE-EMAIL>'
 alias gcin='gcloud info --format="value(config.project)"'
 #
 # show default zone

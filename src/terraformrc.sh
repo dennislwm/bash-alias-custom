@@ -9,6 +9,7 @@ alias tfp='terraform plan'
 alias tfs='terraform show'
 alias tfsl='terraform state list'
 alias tfsr='terraform state rm'
+alias tfv='terraform validate'
 
 #
 # internal aliases

@@ -34,8 +34,8 @@ help-all() {
 }
 help-bash() {
     echo "Bash Aliases"
-    echo "  rcc         Edit .bashrc"
-    echo "  rcs         Load .bashrc"
+    echo "  rcc         Edit startup.sh"
+    echo "  rcs         Load startup.sh"
     echo "  rc-code     Interactive Edit of Bash scripts"
     echo "  rc-config   Interactive Edit of Config files"
 }
@@ -73,6 +73,7 @@ help-git() {
     echo "  gcom        Git checkout master"
     echo "  gcz         Git cz"
     echo "  gi          Git init"
+    echo "  gmv         Git mv"
     echo "  gp          Git push"
     echo "  gpo         Git push origin"
     echo "  gpom        Git push -u origin master"
@@ -121,6 +122,7 @@ help-terraform() {
     echo "  tfs         Terraform show"
     echo "  tfsl        Terraform state list"
     echo "  tfsr        Terraform state rm"
+    echo "  tfv         Terraform validate"
     echo "  tf-apply    Interactive Terraform apply"
     echo "  tf-destroy  Interactive Terraform destroy"
     echo "  tf-plan     Interactive Terraform plan"
