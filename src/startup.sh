@@ -55,6 +55,10 @@ rc-os() {
         echo "LINUX"
     fi
 }
+rc-who() {
+    USER=$(whoami)
+    echo $USER
+}
 
 #
 # inputs
@@ -70,12 +74,18 @@ inp-rcfile() { read -p "Enter filename OR BLANK to quit: " rcfile;
 # global variables
 str_os=$(rc-os)
 if [ "$str_os" == "WINDOWS" ]; then
-    if [ "str_path_config" == "" ]; then
+    str_user=$(rc-who)
+    if [ "$str_user" == "denni" ]; then
+        str_path_config="/d/Users/denni/OneDrive/Documents/GitHub/bash-alias-custom/config"
+        str_path="/d/Users/denni/OneDrive/Documents/GitHub"
+    else
         str_path_config="/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/25bash-alias-custom/config"
+        str_path="/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull"
     fi
     str_docker_localdir='/d/docker/'
 else
     str_path_config="/Users/dennislee/fx-git-pull/02bash-alias-custom/config"
+    str_path="/Users/dennislee/fx-git-pull"
     str_docker_localdir='/Users/dennislee/docker/'
 fi
 str_file_config="$str_path_config/config.txt"

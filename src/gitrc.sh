@@ -64,7 +64,7 @@ git-create() {
 }
 git-new() {
     cancel=true
-    localpath="/d/denbrige/180 FxOption/103 FxOptionVerBack/083 FX-Git-Pull/"
+    localpath="$str_path/"
     remotepath="github.com:dennislwm"
     echo "Git Project details are as follows:"
     echo "  Local path: $localpath"

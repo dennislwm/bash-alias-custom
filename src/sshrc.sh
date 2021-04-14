@@ -100,6 +100,35 @@ ssh-aws() {
         echo "done"
     fi
 }
+ssh-new() {
+    cancel=true
+    echo "Generate a new SSH key as <FILE_ID> in ~/.ssh and append to config file"
+    echo "name of <FILE_ID>, e.g. id_rsa (do not include suffix)"
+    id=$(inp-name)
+    path="$HOME/.ssh"
+    conf="$path/config"
+
+    if [ ! -z "$id" ]; then
+        cancel=""
+
+        if [ -f $conf ]; then
+            result=`grep -i $id$ $conf`
+
+            if [ -z "$result" ]; then
+                ssh-keygen -f $path/$id
+                echo "IdentityFile $path/$id" >> $conf
+                echo "success(0): SSH key $id generated"
+            else
+                echo "error(1): SSH key $id already exists."
+            fi
+        fi
+    fi
+    if [ ! -z $cancel ]; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
 
 #
 # inputs
