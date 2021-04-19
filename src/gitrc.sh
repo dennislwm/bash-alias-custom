@@ -6,6 +6,7 @@ alias gbc='git checkout'
 alias gbd='git branch -d'
 alias gbl='git branch --list'
 alias gbm='git merge'
+alias gbp='git push -u origin'
 alias gbr='git rebase'
 alias gc='git commit'
 alias gce='git clone'
@@ -48,6 +49,7 @@ alias gsh='git show'
 alias gt='git tag'
 alias gta='git tag -a'
 alias gtd='git tag -d'
+alias gtp='git push origin'
 
 #
 # external functions
