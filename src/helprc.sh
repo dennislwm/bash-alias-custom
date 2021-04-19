@@ -84,6 +84,7 @@ help-git() {
     echo "  gcob        Git checkout -b <branch>        # add and checkout a branch"
     echo "  gcom        Git checkout master"
     echo "  gcz         Git cz"
+    echo "  gds         Git diff --stat <commit> <commit>"
     echo "  gi          Git init"
     echo "  gga         Git gc --auto                   # automatically detect if gc required"
     echo "  ggc         Git gc                          # git garbage collection removes broken only"
