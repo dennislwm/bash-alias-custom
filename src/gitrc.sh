@@ -46,6 +46,7 @@ alias gru='git remote set-url origin'
 alias grh='git revert HEAD'
 alias grh1='git revert HEAD~1'
 alias gsh='git show'
+alias gsq='git rebase -i HEAD~'
 alias gt='git tag'
 alias gta='git tag -a'
 alias gtd='git tag -d'
@@ -84,6 +85,51 @@ git-create() {
         token=$( printf '"Authorization: token %s"' "$githubtoken" )
         echo curl -X POST -d \'"$data"\' https://api.github.com/user/repos -H "$token"
         eval curl -X POST -d \'"$data"\' https://api.github.com/user/repos -H "$token"
+        cancel=false
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+git-createnew() {
+    cancel=true
+    localpath="$str_path/"
+    remotepath="github.com:dennislwm"
+    echo "This script creates a remote Git repo and adds a non-Git project folder into the master branch."
+    echo "  Local path: $localpath"
+    echo "  Remote path: $remotepath"
+    echo "WARNING: Use this command within a project folder that is non-Git and contains at least ONE (1) file."
+    echo "WARNING: Use git-create if the project folder does not exist."
+    cat-file "$str_file_config"
+    echo ""
+    pwd
+    echo "Enter the current non-Git project folder name."
+    name=$(inp-name)
+    if [ ! -z "$name" ]; then
+        #---------------------------------
+        # Curl to create empty remote repo
+        data=$( printf '{"name":"%s"}' "$name" )
+        token=$( printf '"Authorization: token %s"' "$githubtoken" )
+        echo curl -X POST -d \'"$data"\' https://api.github.com/user/repos -H "$token"
+        eval curl -X POST -d \'"$data"\' https://api.github.com/user/repos -H "$token"
+        #------------------------
+        # Check not a Git project
+        if [ ! -d ".git" ]; then
+            echo 'gi'
+            gi
+        else
+            echo "Existing git"
+        fi
+        echo "ga ."
+        ga .
+        echo "gc"
+        gc -m "Initial commit"
+        echo "gro git@$remotepath/$name.git"
+        gro git@$remotepath/$name.git
+        echo "gpom"
+        gpom
         cancel=false
     fi
     if $cancel; then
