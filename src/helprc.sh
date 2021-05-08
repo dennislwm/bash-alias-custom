@@ -87,6 +87,7 @@ help-git() {
     echo "  gcz         Git cz"
     echo "  gds         Git diff --stat <commit> <commit>"
     echo "  gi          Git init"
+    echo "  gfu         Git fetch upstream              # fetch changes from upstream"
     echo "  gga         Git gc --auto                   # automatically detect if gc required"
     echo "  ggc         Git gc                          # git garbage collection removes broken only"
     echo "  ggcp        Git gc --prune                  # git garbage collection removes older than 2 weeks"
@@ -95,6 +96,7 @@ help-git() {
     echo "  glp         Git log --pretty=format:'<format>'"
     echo "  glo         Git log --oneline --decorator"
     echo "  gls         Git log --oneline --stat"
+    echo "  gmum        Git merge upstream/main         # Merge changes from upstream main branch into your local main"
     echo "  gmv         Git mv"
     echo "  gp          Git push"
     echo "  gpo         Git push origin"
@@ -103,6 +105,8 @@ help-git() {
     echo "  gss         Git status --short"
     echo "  gsa         Git submodule add"
     echo "  gr          Git remote"
+    echo "  grao        Git remote add origin https://<url>.git     # <url> of forked repo (your copy)"
+    echo "  grau        Git remote add upstream https://<url>.git   # <url> of non-forked repo (original)"
     echo "  grv         Git remote -v"
     echo "  gro         Git status add origin"
     echo "  gru         Git remote set-url origin"
@@ -121,7 +125,7 @@ help-git() {
     echo "  git-pr      Interactive Git clone PR"
     echo "  git-prtest  Interactive Git test PR locally"
     echo "  git-new     Interactive Git init"
-    echo "  git-sync    Interactive Git synchronize"
+    echo "  git-sync    Interactive Git synchronize" 
 }
 help-ledger() {
     echo "  lb          ledger balance -f"

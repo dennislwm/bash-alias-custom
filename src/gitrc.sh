@@ -18,10 +18,11 @@ alias gcgun='git config --global user.name'
 alias gcgue='git config --global user.email'
 alias gco='git checkout'
 alias gcob='git checkout -b'
-alias gcom='git checkout master'
+alias gcom='git checkout $(cat-default)'
 alias gcz='git cz'
 alias gds='git diff --stat'
 alias gi='git init'
+alias gfu='git fetch upstream'
 alias gga='git gc --auto'
 alias ggc='git gc'
 alias ggcp='git gc --prune'
@@ -30,16 +31,18 @@ alias glh='git log --pretty=format:"%h -an - %ar - %s"'
 alias glp='git log --pretty=format:'
 alias glo='git log --oneline --decorate'
 alias gls='git log --oneline --stat'
+alias gmum='git merge upstream/$(cat-default)'
 alias gmv='git mv'
 alias gp='git push'
 alias gpo='git push origin'
-alias gpom='git push -u origin master'
+alias gpom='git push -u origin $(cat-default)'
 alias gs='git status'
 alias gss='git status --short'
 alias gsa='git submodule add'
 alias gr='git remote'
+alias grao='git remote add origin'
+alias grau='git remote add upstream'
 alias grv='git remote -v'
-alias gro='git remote add origin'
 alias grm='git rm --cached'
 # change repository name
 alias gru='git remote set-url origin'
@@ -127,7 +130,7 @@ git-createnew() {
         echo "gc"
         gc -m "Initial commit"
         echo "gro git@$remotepath/$name.git"
-        gro git@$remotepath/$name.git
+        grao git@$remotepath/$name.git
         echo "gpom"
         gpom
         cancel=false
@@ -270,7 +273,7 @@ git-sync() {
                 gcom
                 echo "Push local repository to GitHub"
                 echo "  git merge upstream/master"
-                git merge upstream/master
+                git merge upstream/$(cat-default)
                 echo "  gp"
                 gp
                 cancel=false
@@ -346,6 +349,10 @@ cat-config()
         source "$file"
         awk -v prefix=" " '{print prefix $0}' "$file"
     fi
+}
+cat-default()
+{
+    gbl | grep -e "main" -e "master" | sed 's/ //g'    
 }
 inp-name() {
     read -p "Enter name; OR BLANK to quit: " name
