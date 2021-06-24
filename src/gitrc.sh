@@ -18,10 +18,11 @@ alias gcgun='git config --global user.name'
 alias gcgue='git config --global user.email'
 alias gco='git checkout'
 alias gcob='git checkout -b'
-alias gcom='git checkout master'
+alias gcom='git checkout $(cat-default)'
 alias gcz='git cz'
 alias gds='git diff --stat'
 alias gi='git init'
+alias gfu='git fetch upstream'
 alias gga='git gc --auto'
 alias ggc='git gc'
 alias ggcp='git gc --prune'
@@ -30,22 +31,25 @@ alias glh='git log --pretty=format:"%h -an - %ar - %s"'
 alias glp='git log --pretty=format:'
 alias glo='git log --oneline --decorate'
 alias gls='git log --oneline --stat'
+alias gmum='git merge upstream/$(cat-default)'
 alias gmv='git mv'
 alias gp='git push'
 alias gpo='git push origin'
-alias gpom='git push -u origin master'
+alias gpom='git push -u origin $(cat-default)'
 alias gs='git status'
 alias gss='git status --short'
 alias gsa='git submodule add'
 alias gr='git remote'
+alias grao='git remote add origin'
+alias grau='git remote add upstream'
 alias grv='git remote -v'
-alias gro='git remote add origin'
 alias grm='git rm --cached'
 # change repository name
 alias gru='git remote set-url origin'
 alias grh='git revert HEAD'
 alias grh1='git revert HEAD~1'
 alias gsh='git show'
+alias gsq='git rebase -i HEAD~'
 alias gt='git tag'
 alias gta='git tag -a'
 alias gtd='git tag -d'
@@ -84,6 +88,51 @@ git-create() {
         token=$( printf '"Authorization: token %s"' "$githubtoken" )
         echo curl -X POST -d \'"$data"\' https://api.github.com/user/repos -H "$token"
         eval curl -X POST -d \'"$data"\' https://api.github.com/user/repos -H "$token"
+        cancel=false
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+git-createnew() {
+    cancel=true
+    localpath="$str_path/"
+    remotepath="github.com:dennislwm"
+    echo "This script creates a remote Git repo and adds a non-Git project folder into the master branch."
+    echo "  Local path: $localpath"
+    echo "  Remote path: $remotepath"
+    echo "WARNING: Use this command within a project folder that is non-Git and contains at least ONE (1) file."
+    echo "WARNING: Use git-create if the project folder does not exist."
+    cat-file "$str_file_config"
+    echo ""
+    pwd
+    echo "Enter the current non-Git project folder name."
+    name=$(inp-name)
+    if [ ! -z "$name" ]; then
+        #---------------------------------
+        # Curl to create empty remote repo
+        data=$( printf '{"name":"%s"}' "$name" )
+        token=$( printf '"Authorization: token %s"' "$githubtoken" )
+        echo curl -X POST -d \'"$data"\' https://api.github.com/user/repos -H "$token"
+        eval curl -X POST -d \'"$data"\' https://api.github.com/user/repos -H "$token"
+        #------------------------
+        # Check not a Git project
+        if [ ! -d ".git" ]; then
+            echo 'gi'
+            gi
+        else
+            echo "Existing git"
+        fi
+        echo "ga ."
+        ga .
+        echo "gc"
+        gc -m "Initial commit"
+        echo "gro git@$remotepath/$name.git"
+        grao git@$remotepath/$name.git
+        echo "gpom"
+        gpom
         cancel=false
     fi
     if $cancel; then
@@ -224,7 +273,7 @@ git-sync() {
                 gcom
                 echo "Push local repository to GitHub"
                 echo "  git merge upstream/master"
-                git merge upstream/master
+                git merge upstream/$(cat-default)
                 echo "  gp"
                 gp
                 cancel=false
@@ -300,6 +349,10 @@ cat-config()
         source "$file"
         awk -v prefix=" " '{print prefix $0}' "$file"
     fi
+}
+cat-default()
+{
+    gbl | grep -e "main" -e "master" | sed 's/ //g'    
 }
 inp-name() {
     read -p "Enter name; OR BLANK to quit: " name
