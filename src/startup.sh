@@ -7,6 +7,7 @@ source $HOME/src/dockerrc.sh
 source $HOME/src/gitrc.sh
 source $HOME/src/helprc.sh
 source $HOME/src/ledgerrc.sh
+source $HOME/src/lpassrc.sh
 source $HOME/src/sshrc.sh
 source $HOME/src/terraformrc.sh
 source $HOME/src/wprc.sh

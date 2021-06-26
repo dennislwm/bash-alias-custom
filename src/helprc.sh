@@ -5,6 +5,7 @@ alias ha='help-all'
 alias hb='help-bash'
 alias hd='help-docker'
 alias hl='help-ledger'
+alias hlp='help-lpass'
 alias hg='help-git'
 alias hs='help-ssh'
 alias ht='help-terraform'
@@ -19,6 +20,7 @@ help() {
     echo "  hd          Help docker"
     echo "  hg          Help git"
     echo "  hl          Help ledger"
+    echo "  hlp         Help lpass"
     echo "  hs          Help ssh"
     echo "  ht          Help terraform"
     echo "  hw          Help wp"
@@ -28,6 +30,7 @@ help-all() {
     help-docker
     help-git
     help-ledger
+    help-lpass
     help-ssh
     help-terraform
     help-wp
@@ -137,6 +140,15 @@ help-ledger() {
     echo "  lbpl        ledger -M balance ^income ^expenses -f"
     echo "  le          ledger equity -f"
     echo "  lrli        ledger -M register ^liabilities -f"
+}
+help-lpass() {
+    echo "  lp          lpass"
+    echo "  lpc         Edit ~/.lpass/env"
+    echo "  lph         lpass --help"
+    echo "  lpls        lpass ls"
+    echo "  lpshn       lpass show --notes"
+    echo "  lpsy        lpass sync"
+    echo "  lp_note_add Interactive lpass edit --notes"
 }
 help-ssh() {
     echo "Ssh Aliases"
