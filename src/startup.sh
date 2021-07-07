@@ -2,6 +2,7 @@ PS1="\[\033[36m\]\u\[\033[m\]:\[\033[33;1m\]\w\[\033[m\]\$ "
 
 #
 # source sub-scripts
+source $HOME/src/archiveboxrc.sh
 source $HOME/src/azrc.sh
 source $HOME/src/dockerrc.sh
 source $HOME/src/gitrc.sh

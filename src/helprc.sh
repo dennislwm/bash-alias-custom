@@ -2,6 +2,7 @@
 # external aliases
 alias h='help'
 alias ha='help-all'
+alias hab='help-archivebox'
 alias hb='help-bash'
 alias hd='help-docker'
 alias hl='help-ledger'
@@ -16,6 +17,7 @@ alias hw='help-wp'
 help() {
     echo "Help Aliases"
     echo "  ha          Help ALL"
+    echo "  hab         Help archivebox"
     echo "  hb          Help bash"
     echo "  hd          Help docker"
     echo "  hg          Help git"
@@ -34,6 +36,17 @@ help-all() {
     help-ssh
     help-terraform
     help-wp
+}
+help-archivebox() {
+    echo "ArchiveBox Aliases"
+    echo "  ab          Archivebox"
+    echo "  aba         Archivebox add"
+    echo "  abcs        Archivebox config --set"
+    echo "  abmyconf    Archivebox set my config"
+    echo "  abmymthd    Archivebox set my method"
+    echo "  abr         Archivebox remove"
+    echo "  abs         Archivebox server"
+    echo "  abv         Archivebox version"
 }
 help-bash() {
     echo "Bash Aliases"
