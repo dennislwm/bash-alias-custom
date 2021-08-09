@@ -15,7 +15,7 @@ alias hw='help-wp'
 #
 # external functions
 help() {
-    echo "Help Aliases"
+    echo "Help Aliases $RC_VERSION"
     echo "  ha          Help ALL"
     echo "  hab         Help archivebox"
     echo "  hb          Help bash"
@@ -42,6 +42,7 @@ help-archivebox() {
     echo "  ab          Archivebox"
     echo "  aba         Archivebox add"
     echo "  abcs        Archivebox config --set"
+    echo "  ab-import   Archivebox import document from Couchdb RESTful API"
     echo "  abmyconf    Archivebox set my config"
     echo "  abmymthd    Archivebox set my method"
     echo "  abr         Archivebox remove"
@@ -142,6 +143,7 @@ help-git() {
     echo "  git-prtest  Interactive Git test PR locally"
     echo "  git-new     Interactive Git init"
     echo "  git-sync    Interactive Git synchronize" 
+    echo "  git-tag     Interactive Git tag"
 }
 help-ledger() {
     echo "  lb          ledger balance -f"
@@ -169,6 +171,8 @@ help-ssh() {
     echo "  bash_scp    Scp -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1"
     echo "  bash_ssh    Ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1"
     echo "  bash_sshaws Ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_aws01"
+    echo "  bash_tgz    Tar czvf"
+    echo "  bash_ugz    Tar xzvf"
     echo "  scp-dn      Interactive Scp dir download"
     echo "  scp-up      Interactive Scp dir upload"
 }

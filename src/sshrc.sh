@@ -3,6 +3,8 @@
 #
 # internal aliases
 alias bash_ip='cat-file "$str_file_ipaddr"'
+alias bash_tgz='tar czvf'
+alias bash_ugz='tar xzvf'
 if [ "$str_os" == "WINDOWS" ]; then
     alias bash_scpdir='scp -F c:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1 -r'
     alias bash_ssh='ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1'
