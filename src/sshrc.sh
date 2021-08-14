@@ -11,10 +11,10 @@ if [ "$str_os" == "WINDOWS" ]; then
     alias bash_sshaws='ssh -F C:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_aws01'
     alias bash_scp='scp -F c:\\Users\\denbrige\\.ssh\\config -i C:\\Users\\denbrige\\.ssh\\id_rsa_do1'
 else
-    alias bash_scpdir='scp -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1 -r'
-    alias bash_ssh='ssh -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1'
-    alias bash_sshaws='ssh -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_aws01'
-    alias bash_scp='scp -F /Users/dennislee/.ssh/config -i /Users/dennislee/.ssh/id_rsa_do1'
+    alias bash_scpdir="scp -F /Users/dennislwm/.ssh/config -i /Users/dennislwm/.ssh/id_rsa_do1 -r"
+    alias bash_ssh="ssh -F /Users/dennislwm/.ssh/config -i /Users/dennislwm/.ssh/id_rsa_do1"
+    alias bash_sshaws="ssh -F /Users/dennislwm/.ssh/config -i /Users/dennislwm/.ssh/id_rsa_aws01"
+    alias bash_scp="scp -F /Users/dennislwm/.ssh/config -i /Users/dennislwm/.ssh/id_rsa_do1"
 fi
 
 #
@@ -31,8 +31,8 @@ scp-dn() {
         if [ ! -z "$name2" ]; then
             remotedir=${!name2}
             echo "User" $remotedir
-            echo bash_scpdir root@"$ipaddr"\:"$remotedir $str_docker_localdir"
-            bash_scpdir root@"$ipaddr"\:"$remotedir" "$str_docker_localdir"
+            echo scp -F $str_file_ssh_config -i $str_file_ssh_do1 -r root@"$ipaddr"\:"$remotedir $str_docker_localdir"
+            scp -F $str_file_ssh_config -i $str_file_ssh_do1 -r root@"$ipaddr"\:"$remotedir" "$str_docker_localdir"
             cancel=""
         fi
     fi

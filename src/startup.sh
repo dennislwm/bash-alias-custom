@@ -1,5 +1,5 @@
 PS1="\[\033[36m\]\u@\[\033[35m\]\h\[\033[m\]:\[\033[33;1m\]\w\[\033[m\]\$ "
-RC_VERSION="0.1.1"
+RC_VERSION="0.1.2"
 
 #
 # source sub-scripts
@@ -77,8 +77,8 @@ inp-rcfile() { read -p "Enter filename OR BLANK to quit: " rcfile;
 #
 # global variables
 str_os=$(rc-os)
+str_user=$(rc-who)
 if [ "$str_os" == "WINDOWS" ]; then
-    str_user=$(rc-who)
     if [ "$str_user" == "denni" ]; then
         str_path_config="/d/Users/denni/OneDrive/Documents/GitHub/bash-alias-custom/config"
         str_path="/d/Users/denni/OneDrive/Documents/GitHub"
@@ -88,9 +88,12 @@ if [ "$str_os" == "WINDOWS" ]; then
     fi
     str_docker_localdir='/d/docker/'
 else
-    str_path_config="/Users/dennislee/fx-git-pull/02bash-alias-custom/config"
-    str_path="/Users/dennislee/fx-git-pull"
-    str_docker_localdir='/Users/dennislee/docker/'
+    str_path_config="/Users/$str_user/fx-git-pull/02bash-alias-custom/config"
+    str_path="/Users/$str_user/fx-git-pull"
+    str_docker_localdir="/Users/$str_user/docker/"
+    str_path_ssh="/Users/$str_user/.ssh"
+    str_file_ssh_config="/Users/$str_user/.ssh/config"
+    str_file_ssh_do1="/Users/$str_user/.ssh/id_rsa_do1"
 fi
 str_file_config="$str_path_config/config.txt"
 str_file_ipaddr="$str_path_config/ipaddr.txt"

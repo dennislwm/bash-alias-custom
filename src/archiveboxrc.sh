@@ -10,7 +10,7 @@ alias abs='archivebox server'
 alias abv='archivebox version'
 
 ab-import() {
-  AB_COUCHDB_URI="https://couchdb.myvnc.com/db-inkdrop"
+  AB_COUCHDB_URI="https://couchdb.markit.work/db-inkdrop"
   AB_COUCHDB_DOC="note:XFhz43AsJ"
   if [ ! -z "$1" ]; then
     AB_COUCHDB_DOC="$1"
