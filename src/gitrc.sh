@@ -246,6 +246,59 @@ git-prtest() {
         echo "done"
     fi
 }
+git-pull() {
+    cancel=true
+    gbl
+    branchgit=$(inp-name)
+    if [ ! -z "$branchgit" ]; then
+        default=$(cat-default)
+        gco $default
+        outgit=$(cat-already)
+        if [ -z "$outgit" ]; then
+            confirm="yes"
+        else
+            gbl
+            echo "Merge $default into $branchgit?"
+            confirm=$(inp-confirm)
+        fi
+        if [ ! -z "$confirm" ]; then
+            echo "gbc $branchgit"
+            gbc $branchgit
+            echo "git merge $(cat-default)"
+            git merge $(cat-default)
+            cancel=false
+        else
+            echo "Already up to date."
+        fi
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+git-squash() {
+    cancel=true
+    glo | head -n 10
+    echo "Note: Your local branch should be updated with master"
+    echo "  $ git-pull"
+    echo "Git squash commits on your local branch"
+    echo "  Enter commit name BEFORE your first Pick commit"
+    echo "  Your first Pick commit cannot be squashed"
+    commitgit=$(inp-name)
+    if [ ! -z "$commitgit" ]; then
+        echo "git rebase -i $commitgit"
+        git rebase -i $commitgit
+        echo "Once completed push changes to your remote branch."
+        echo "  $ git push -f origin BRANCH"
+        cancel=false
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
 git-sync() {
     cancel=true
     isgit=$(assert-isgit)
@@ -341,6 +394,15 @@ inp-confirm() {
         echo $name
     fi
 }
+cat-already()
+{
+    out=( $( git pull | grep -e 'Already up to date.') )
+    if [ "$out" = "Already" ]; then
+        echo $out
+    else
+        echo ""
+    fi
+}
 cat-config()
 {
     file=$str_file_config
@@ -352,10 +414,10 @@ cat-config()
 }
 cat-default()
 {
-    gbl | grep -e "main" -e "master" | sed 's/ //g'    
+    gbl | grep -e "bullish" -e "develop" -e "main" -e "master" | sed 's/ //g' | sed 's/*//g'
 }
 inp-name() {
-    read -p "Enter name; OR BLANK to quit: " name
+    read -p "Enter $1name; OR BLANK to quit: " name
     if [ -z $name ]; then
         echo ""
     else

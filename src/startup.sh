@@ -8,7 +8,7 @@ if [ -f ~/.git-completion.bash ]; then
 else
     PS1="\[\033[36m\]\u@\[\033[35m\]\h\[\033[m\]:\[\033[33;1m\]\w\[\033[m\]\$ "
 fi
-RC_VERSION="0.1.2"
+RC_VERSION="0.1.4"
 
 #
 # source sub-scripts
@@ -17,10 +17,13 @@ source $HOME/src/azrc.sh
 source $HOME/src/dockerrc.sh
 source $HOME/src/gitrc.sh
 source $HOME/src/helprc.sh
+source $HOME/src/kubectlrc.sh
 source $HOME/src/ledgerrc.sh
 source $HOME/src/lpassrc.sh
 source $HOME/src/sshrc.sh
 source $HOME/src/terraformrc.sh
+source $HOME/src/vaultrc.sh
+source $HOME/src/watsonrc.sh
 source $HOME/src/wprc.sh
 
 #

@@ -5,6 +5,7 @@ alias ha='help-all'
 alias hab='help-archivebox'
 alias hb='help-bash'
 alias hd='help-docker'
+alias hku='help-kubectl'
 alias hl='help-ledger'
 alias hlp='help-lpass'
 alias hg='help-git'
@@ -21,6 +22,7 @@ help() {
     echo "  hb          Help bash"
     echo "  hd          Help docker"
     echo "  hg          Help git"
+    echo "  hku         Help kubectl"
     echo "  hl          Help ledger"
     echo "  hlp         Help lpass"
     echo "  hs          Help ssh"
@@ -141,9 +143,47 @@ help-git() {
     echo "  git-createnew Interactive Git create remote repo, init and push locally"
     echo "  git-pr      Interactive Git clone PR"
     echo "  git-prtest  Interactive Git test PR locally"
+    echo "  git-pull    Interactive Git pull"
     echo "  git-new     Interactive Git init"
+    echo "  git-squash  Interactive Git squash"
     echo "  git-sync    Interactive Git synchronize" 
     echo "  git-tag     Interactive Git tag"
+}
+help-kubectl() {
+    echo "  ku              Kubectl"
+    echo "  kua             Kubectl apply -f services/hello-blue.yaml"
+    echo "  kuc             Kubectl create -f services/auth.yaml"
+    echo "  kucd            Kubectl create deployment hello-server --image=gcr.io/google-samples/hello-app:1.0"
+    echo "  kucns           Kubectl create ns"
+    echo "  kud             Kubectl describe"
+    echo "  kudn            Kubectl describe node"
+    echo "  kudp            Kubectl describe pod"
+    echo "  kudel           Kubectl delete"
+    echo "  kued            Kubectl edit deployment"
+    echo "  kuep            Kubectl edit pod"
+    echo "  kuex            Kubectl exec"
+    echo "  kund            Kubectl explain deployment"
+    echo "  kuxd            Kubectl expose deployment hello-server --type=LoadBalancer --port 8080"
+    echo "  kugap           Kubectl get authorizationpolicy"
+    echo "  kugd            Kubectl get deployments"
+    echo "  kuggw           Kubectl get gateway"
+    echo "  kugns           Kubectl get namespaces"
+    echo "  kugn            Kubectl get nodes"
+    echo "  kugp            Kubectl get pods | grep hello- | wc -l"
+    echo "  kugpc           Kubectl get pods -o jsonpath='{.spec.containers[*].name}*'"
+    echo "  kugr            Kubectl get replicasets"
+    echo "  kugs            Kubectl get service"
+    echo "  kugtls          Kubectl get secret cloudflare-tls -n istio-system -o yaml > cloudflare_tls_$(date '+%Y_%m_%d').yaml"
+    echo "  kugvs           Kubectl get virtualservice"
+    echo "  kulg            Kubectl logs"
+    echo "  kurh            Kubectl rollout history deployment/hello"
+    echo "  kurp            Kubectl rollout pause deployment/hello"
+    echo "  kurr            Kubectl rollout resume deployment/hello"
+    echo "  kurs            Kubectl rollout status deployment/hello"
+    echo "  kuru            Kubectl rollout undo deployment/hello"
+    echo "  kusd            Kubectl scale deployment hello --replicas=3"
+    echo "  ku-tls-deploy   Interactive Kubectl deploy new origin tls.crt and tls.key into Istio"
+    echo "  ku-tls-annotate Interactive Annotate secret cloudflare-tls"
 }
 help-ledger() {
     echo "  lb          ledger balance -f"

@@ -1,0 +1,8 @@
+alias wae='watson edit'
+alias wal='watson log'
+alias wap='watson projects'
+alias wart='watson restart'
+alias was='watson status'
+alias wasp='watson stop'
+alias wast='watson start'
+alias wat='watson tag'
