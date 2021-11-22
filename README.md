@@ -130,6 +130,8 @@ done
 
 </details>
 
+</details>
+
 # Troubleshooting
 
 ## Error bash: __git_ps1: command not found

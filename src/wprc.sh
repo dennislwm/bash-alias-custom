@@ -23,16 +23,81 @@ alias wpu='wp user'
 # source config files
 source $HOME/config/transfiguration.md
 
+wp-minimize() {
+    cancel=true
+    echo "wp-minimize: Minimizes image(s)"
+    echo "Usage: [WP_DEBUG=$WP_DEBUG] wp-minimize WP_PATH WP_DEST"
+    echo "Input:"
+    echo "  WP_PATH: /path/to/source"
+    echo "  WP_DEST: /path/to/destination"
+
+    if [ ! -z "$1" ]; then
+        WP_PATH=$1
+    else
+        echo "Error: Missing WP_PATH"
+        return
+    fi
+    if [ ! -z "$2" ]; then
+        WP_DEST=$2
+    else
+        echo "Error: Missing WP_DEST"
+        return
+    fi
+    if [ ! -d "$WP_PATH" ]; then
+        echo "Error: $WP_PATH does not exist"
+        return
+    fi
+    if [ ! -d "$WP_DEST" ]; then
+        echo "Error: $WP_DEST does not exist"
+        return
+    fi
+    WP_TOTAL=$( ls -lAd "$WP_PATH"/* | wc -l | xargs )
+    echo "  WP_PATH=$WP_PATH"
+    echo "  WP_DEST=$WP_DEST"
+    echo "Minimize $WP_TOTAL image(s)? "
+
+    confirm=$( inp-confirm )
+    if [ "$confirm" = "yes" ]; then
+        cancel=false
+        for file in "$WP_PATH"/*; do
+            wp_name=$( basename "$file" )
+            wp_ext="${wp_name##*.}"
+            echo "Minimizing $wp_name"
+
+            wp_data=$( printf '"@%s"' "$file" )
+            wp_token=$( echo -n "$WP_TINYPNG_USERNAME:$WP_TINYPNG_PASSWORD" | base64 )
+            wp_header1="$( printf '"authorization: Basic %s"' "$wp_token" )"
+            wp_header2="$( printf '"cache-control: no-cache"' )"
+            if [ "$WP_DEBUG" = "true" ]; then
+                echo curl -X POST --url https://api.tinify.com/shrink --data-binary "$wp_data" -H "$wp_header1" -H "$wp_header2"
+            else
+                eval curl -X POST --url https://api.tinify.com/shrink --data-binary "$wp_data" -H "$wp_header1" -H "$wp_header2" | jq ".output.url" | xargs curl -o $WP_DEST/"$wp_name"
+            fi
+        done
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+
 wp-upload() {
     cancel=true
     echo "wp-upload: Minimizes and uploads image(s) to WordPress"
-    echo "Usage: [WP_DEBUG=$WP_DEBUG] wp-upload [WP_PATH]"
+    echo "Usage: [WP_DEBUG=$WP_DEBUG] wp-upload WP_PATH"
     echo "Input:"
-    echo "  [WP_PATH]: /path/to (default: /Users/dennislwm/fx-git-pull/01transfiguration.sg/minify)"
+    echo "  WP_PATH: /path/to/images"
 
-    WP_PATH="/Users/dennislwm/fx-git-pull/01transfiguration.sg/minify"
     if [ ! -z "$1" ]; then
         WP_PATH=$1
+    else
+        echo "Error: Missing WP_PATH"
+        return
+    fi
+    if [ ! -d "$WP_PATH" ]; then
+        echo "Error: $WP_PATH does not exist"
+        return
     fi
     WP_TOTAL=$( ls -lAd "$WP_PATH"/* | wc -l | xargs )
     echo "  WP_PATH=$WP_PATH"
