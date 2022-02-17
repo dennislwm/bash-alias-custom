@@ -22,7 +22,6 @@ source $HOME/src/ledgerrc.sh
 source $HOME/src/lpassrc.sh
 source $HOME/src/sshrc.sh
 source $HOME/src/terraformrc.sh
-source $HOME/src/vaultrc.sh
 source $HOME/src/watsonrc.sh
 source $HOME/src/wprc.sh
 
