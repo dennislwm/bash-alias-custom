@@ -133,4 +133,3 @@ wp-upload() {
 
 # References
 #   https://wordpress.stackexchange.com/questions/325776/add-media-with-wp-rest-api-v2-ii
-#   curl -X POST --url https://transfiguration.sg/wp-json/wp/v2/media --data-binary "@/Users/dennislwm/fx-git-pull/01transfiguration.sg/asset/cottupdate/minify/cpanel-zone-editor.png" -H "content-disposition: attachment; filename=cpanel-zone-editor.png" -H "authorization: Basic ZGVubmlzbHdtOmx2Y2cgRUFYTSBib29GIDlNTU4gSEROZiBzU3RO" -H "cache-control: no-cache" -H "content-type: image/png" --location

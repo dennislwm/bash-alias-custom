@@ -49,6 +49,7 @@ help-archivebox() {
     echo "  abmymthd    Archivebox set my method"
     echo "  abr         Archivebox remove"
     echo "  abs         Archivebox server"
+    echo "  auu         Archivebox update --status unarchived"
     echo "  abv         Archivebox version"
 }
 help-bash() {
