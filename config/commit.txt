@@ -1,0 +1,48 @@
+# ----------------------------------------------------------
+# Header - type(scope): Brief description
+# ----------------------------------------------------------
+#    * feat             A new feature - SemVar PATCH
+#    * fix              A bug fix - SemVar MINOR
+#    * BREAKING CHANGE  Breaking API change - SemVar MAJOR
+#    * docs             Change to documentation only
+#    * style            Change to style (whitespace, etc.)
+#    * refactor         Change not related to a bug or feat
+#    * perf             Change that affects performance
+#    * test             Change that adds/modifies tests
+#    * build            Change to build system
+#    * ci               Change to CI pipeline/workflow
+#    * chore            General tooling/config/min refactor
+# ----------------------------------------------------------
+#   * Ex: feat(couchdb): Add playbook for couchdb
+# ----------------------------------------------------------
+
+# ----------------------------------------------------------
+# Reason - More detailed description, if necessary
+# ----------------------------------------------------------
+#   * Ex: - The main resource file, main.tf, has a shared 
+# resource objSshKey, and calls each module, where variables 
+# that are not overridden are assigned.
+# ----------------------------------------------------------
+Reason:
+
+# ----------------------------------------------------------
+# Known Issue
+# ----------------------------------------------------------
+#   * Ex: - Wordpress (OpenLiteSpeed image) has permission 
+# errors.
+# ----------------------------------------------------------
+Known Issue:
+
+# ----------------------------------------------------------
+# Limitation
+# ----------------------------------------------------------
+#   * Ex: - git-tag is untested
+# ----------------------------------------------------------
+Limitation:
+
+# ----------------------------------------------------------
+# This commit does not include
+# ----------------------------------------------------------
+#   * Ex: - bash script to set IP of NoIP dynamic host
+# ----------------------------------------------------------
+This commit does not include:

@@ -12,6 +12,7 @@ alias gc='git commit'
 alias gce='git clone'
 alias gcg='git config --global'
 alias gcgce='git config --global core.editor'
+alias gcgct='git config --global commit.template'
 alias gcggp='git config --global gc.pruneexpire'
 alias gcgl='git config --global --list'
 alias gcgun='git config --global user.name'
@@ -57,6 +58,28 @@ alias gtp='git push origin'
 
 #
 # external functions
+git-bd() {
+  gcom
+  err=$?
+  if [ $err -ne 0 ]; then
+    return $err
+  fi
+
+  branchgit=$(git branch | grep --invert-match '\*' | cut -c 3- | fzf --preview="git log {} --")
+
+  if [ -n "$branchgit" ]; then
+    echo "Delete branch $branchgit?"
+    confirm=$(inp-confirm)
+  fi
+  if [ ! -z "$confirm" ]; then
+    echo "gbd $branchgit"
+    gbd "$branchgit"
+    echo "done"
+  else
+    echo "user cancel"
+  fi
+}
+
 git-clone() {
     cancel=true
     localgit=$(inp-localgit)
