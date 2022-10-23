@@ -409,14 +409,6 @@ assert-isgit() {
     # returns empty if folder is a git repository
     git remote -v | grep fatal
 }
-inp-confirm() {
-    read -p "Enter yes to confirm; OR BLANK to quit: " name
-    if [ -z $name ]; then
-        echo ""
-    else
-        echo $name
-    fi
-}
 cat-already()
 {
     out=( $( git pull | grep -e 'Already up to date.') )
@@ -438,22 +430,6 @@ cat-config()
 cat-default()
 {
     gbl | grep -e "bullish" -e "develop" -e "main" -e "master" | sed 's/ //g' | sed 's/*//g'
-}
-inp-name() {
-    read -p "Enter $1name; OR BLANK to quit: " name
-    if [ -z $name ]; then
-        echo ""
-    else
-        echo $name
-    fi
-}
-inp-number() {
-    read -p "Enter number; OR BLANK to quit: " number
-    if [ -z $number ]; then
-        echo ""
-    else
-        echo $number
-    fi
 }
 function select_release_type(){
 	echo "Select release type : "
