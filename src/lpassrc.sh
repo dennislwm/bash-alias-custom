@@ -9,32 +9,42 @@ alias lpsy='lpass sync'
 
 #----------
 # functions
+lp-login() {
+  cancel=true
+  strName=$( inp-str email )
+  if [ ! -z "$strName" ]; then
+    lpass login "$strName"
+  else
+    echo "user cancel"
+  fi
+}
 lp_note_add() {
   cancel=true
-  ls
-  name=$( lp_name " of file" )
-  if [ ! -z "$name" ]; then
-    if [ -f "$name" ]; then
-      project=$( lp_name " of group" )
-      if [ ! -z "$project" ]; then
+  ls -lart
+  strName=$( inp-str "group/file" )
+  if [ ! -z "$strName" ]; then
+    group="${strName%/*}"
+    file="${strName##*/}"
+    if [ -f "$group/$file" ]; then
+      if [ -d "$group" ]; then
         #---------
         # Is note?
-        exist=$( lp_is_note "$project/$name" )
+        exist=$( lp_is_note "$group/$file" )
         if [ ! -z "$exist" ]; then
           #---------
           # Replace?
-          ok=$( lp_yesno "Replace existing note $project/$name? " )
+          ok=$( lp_yesno "Replace existing note $group/$file? " )
         else
-          ok=$( lp_yesno "Add new note $project/$name? ")
+          ok=$( lp_yesno "Add new note $group/$file? ")
         fi
         if [ ok ]; then
-          cat $name | lpass edit --notes --non-interactive "$project/$name"
+          cat "$group/$file" | lpass edit --notes --non-interactive "$group/$file"
           lpass sync
           cancel=false
         fi
       fi
     else
-      echo "Error: No such file or directory"
+      echo "Error: No such folder or file [$group/$file]"
       return 1
     fi
   fi

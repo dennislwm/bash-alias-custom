@@ -7,7 +7,7 @@ alias abmyconf='archivebox config --set CHROME_HEADLESS=True'
 alias abmymthd='archivebox config --set SAVE_TITLE=True SAVE_FAVICON=False SAVE_WGET=True SAVE_WARC=False SAVE_PDF=True SAVE_SCREENSHOT=False SAVE_DOM=False SAVE_SINGLEFILE=False SAVE_READABILITY=False SAVE_MERCURY=False SAVE_GIT=False SAVE_MEDIA=False SAVE_ARCHIVE_DOT_ORG=False'
 alias abr='archivebox remove'
 alias abs='archivebox server'
-alias auu='archivebox update --status unarchived'
+alias abuu='archivebox update --status unarchived'
 alias abv='archivebox version'
 
 ab-import() {

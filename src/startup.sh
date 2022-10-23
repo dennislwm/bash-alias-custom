@@ -24,6 +24,7 @@ source $HOME/src/sshrc.sh
 source $HOME/src/terraformrc.sh
 source $HOME/src/watsonrc.sh
 source $HOME/src/wprc.sh
+source $HOME/src/inputrc.sh
 
 #
 # external aliases

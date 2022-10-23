@@ -18,6 +18,8 @@ alias wppsr='wp plugin search --fields=name,rating,ratings,num_ratings,downloade
 alias wppu='wp plugin uninstall'
 alias wppud='wp plugin uninstall --deactivate'
 alias wpu='wp user'
+alias wpmn='wp-minimize media minify'
+alias wpup='wp-upload minify'
 
 #
 # source config files
@@ -25,11 +27,19 @@ source $HOME/config/transfiguration.md
 
 wp-minimize() {
     cancel=true
-    echo "wp-minimize: Minimizes image(s)"
-    echo "Usage: [WP_DEBUG=$WP_DEBUG] wp-minimize WP_PATH WP_DEST"
-    echo "Input:"
-    echo "  WP_PATH: /path/to/source"
-    echo "  WP_DEST: /path/to/destination"
+    prompt=true
+    if [ "$1" = "-y" ]; then
+        prompt=false
+        shift
+    fi
+
+    if $prompt; then
+        echo "wp-minimize: Minimizes image(s)"
+        echo "Usage: [WP_DEBUG=$WP_DEBUG] wp-minimize WP_PATH WP_DEST"
+        echo "Input:"
+        echo "  WP_PATH: /path/to/source"
+        echo "  WP_DEST: /path/to/destination"
+    fi
 
     if [ ! -z "$1" ]; then
         WP_PATH=$1
@@ -56,7 +66,11 @@ wp-minimize() {
     echo "  WP_DEST=$WP_DEST"
     echo "Minimize $WP_TOTAL image(s)? "
 
-    confirm=$( inp-confirm )
+    if $prompt; then
+      confirm=$( inp-confirm )
+    else
+      confirm=yes
+    fi
     if [ "$confirm" = "yes" ]; then
         cancel=false
         for file in "$WP_PATH"/*; do
@@ -84,10 +98,18 @@ wp-minimize() {
 
 wp-upload() {
     cancel=true
-    echo "wp-upload: Minimizes and uploads image(s) to WordPress"
-    echo "Usage: [WP_DEBUG=$WP_DEBUG] wp-upload WP_PATH"
-    echo "Input:"
-    echo "  WP_PATH: /path/to/images"
+    prompt=true
+    if [ "$1" = "-y" ]; then
+        prompt=false
+        shift
+    fi
+
+    if $prompt; then
+        echo "wp-upload: Minimizes and uploads image(s) to WordPress"
+        echo "Usage: [WP_DEBUG=$WP_DEBUG] wp-upload WP_PATH"
+        echo "Input:"
+        echo "  WP_PATH: /path/to/images"
+    fi
 
     if [ ! -z "$1" ]; then
         WP_PATH=$1
@@ -103,7 +125,11 @@ wp-upload() {
     echo "  WP_PATH=$WP_PATH"
     echo "Upload $WP_TOTAL image(s) to WordPress? "
 
-    confirm=$( inp-confirm )
+    if $prompt; then
+      confirm=$( inp-confirm )
+    else
+      confirm="yes"
+    fi
     if [ "$confirm" = "yes" ]; then
         cancel=false
         for file in "$WP_PATH"/*; do
