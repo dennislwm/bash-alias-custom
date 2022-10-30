@@ -102,6 +102,31 @@ ssh-aws() {
         echo "done"
     fi
 }
+ssh-upid() {
+    cancel=true
+    echo $PATH
+    cat-file "$str_file_ipaddr"
+    name=$(inp-name)
+    ipaddr=${!name}
+    if [ ! -z "$ipaddr" ]; then
+        echo "User"
+        user=$(inp-name)
+        if [ ! -z "$name" ]; then
+            echo "Password"
+            pass=$(inp-name)
+            if [ ! -z "$pass" ]; then
+              echo sshpass -p $pass ssh-copy-id -f -i /Users/dennislwm/.ssh/id_rsa_main "$user@"$ipaddr
+              sshpass -p $pass ssh-copy-id -f -i /Users/dennislwm/.ssh/id_rsa_main "$user@"$ipaddr
+              cancel=""
+            fi
+        fi
+    fi
+    if [ ! -z $cancel ]; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
 ssh-new() {
     cancel=true
     echo "Generate a new SSH key as <FILE_ID> in ~/.ssh and append to config file"
