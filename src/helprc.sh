@@ -204,6 +204,7 @@ help-lpass() {
     echo "  lpls        lpass ls"
     echo "  lpshn       lpass show --notes"
     echo "  lpsy        lpass sync"
+    echo "  lp-login    Interactive lpass login"
     echo "  lp_note_add Interactive lpass edit --notes"
 }
 help-ssh() {

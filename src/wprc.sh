@@ -23,7 +23,11 @@ alias wpup='wp-upload minify'
 
 #
 # source config files
-source $HOME/config/transfiguration.md
+if [ -f $HOME/config/transfiguration.md ]; then
+    source $HOME/config/transfiguration.md
+else
+    echo "[wprc][INFO] File not found [config/transfiguration.md]"
+fi
 
 wp-minimize() {
     cancel=true
