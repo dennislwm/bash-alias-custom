@@ -2,3 +2,4 @@
 .env
 config/config.txt
 config/ipaddr.txt
+test/test_helper
