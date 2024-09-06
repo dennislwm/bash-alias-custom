@@ -11,6 +11,7 @@ alias lem="ledger reg ^expenses --period-sort '(amount)' -M --begin 2022/06/01 -
 
 print_dates_last_12_months() {
   local file_name="$1"
+  local account="$2"
 
   if [[ -z "$file_name" ]]; then
     echo "Error: file_name is an empty string."
