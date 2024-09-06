@@ -28,7 +28,6 @@ print_dates_last_12_months() {
     last_day=$(date -v-"$i"m -v1d -v+1m -v-1d +%Y-%m-%d)
 
     echo "First day: $first_day, Last day: $last_day"
+    ledger bal "${account}" --period monthly --begin ${first_day} --end ${last_day} -f ${file_name}
   done
 }
-
-print_dates_last_12_months
