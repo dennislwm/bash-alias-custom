@@ -21,7 +21,7 @@ print_dates_last_12_months() {
     echo "Error: file '$file_name' does not exist."
     return 1
   fi
-  for ((i=1; i<=12; i++)); do
+  for ((i=12; i>=1; i--)); do
     # Calculate the first day of the month
     first_day=$(date -v-"$i"m -v1d +%Y-%m-01)
     # Calculate the last day of the month
