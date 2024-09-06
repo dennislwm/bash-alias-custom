@@ -12,9 +12,9 @@ alias lem="ledger reg ^expenses --period-sort '(amount)' -M --begin 2022/06/01 -
 print_dates_last_12_months() {
     for ((i=1; i<=12; i++)); do
         # Calculate the first day of the month
-        first_day=$(date --date="$i months ago" +%Y-%m-01)
+        first_day=$(date -v-"$i"m -v1d +%Y-%m-01)
         # Calculate the last day of the month
-        last_day=$(date --date="$(date --date="$i months ago +1 month" +%Y-%m-01) -1 day" +%Y-%m-%d)
+        last_day=$(date -v-"$i"m -v1d -v+1m -v-1d +%Y-%m-%d)
 
         echo "First day: $first_day, Last day: $last_day"
     done
