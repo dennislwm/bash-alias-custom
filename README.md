@@ -1,8 +1,87 @@
 # bash-alias-custom
 
-# Setup
+<!-- TOC -->
 
-## Install Git Bash autocompletion
+- [bash-alias-custom](#bash-alias-custom)
+- [Introduction](#introduction)
+    - [Audience](#audience)
+- [System Overview](#system-overview)
+    - [Benefits and Values](#benefits-and-values)
+- [User Personas](#user-personas)
+    - [RACI Matrix](#raci-matrix)
+- [Requirements](#requirements)
+    - [Workstation](#workstation)
+- [Installation and Configuration](#installation-and-configuration)
+    - [Clone the repo and edit your bash profile](#clone-the-repo-and-edit-your-bash-profile)
+    - [Install Git Bash autocompletion](#install-git-bash-autocompletion)
+    - [Git status](#git-status)
+- [Shell script wprc.sh for WordPress](#shell-script-wprcsh-for-wordpress)
+    - [Function wp-upload](#function-wp-upload)
+        - [Understand function wp-upload](#understand-function-wp-upload)
+        - [Execute command wp-upload](#execute-command-wp-upload)
+        - [Debug function wp-upload](#debug-function-wp-upload)
+- [Troubleshooting](#troubleshooting)
+    - [Error bash: __git_ps1: command not found](#error-bash-__git_ps1-command-not-found)
+
+<!-- /TOC -->
+
+---
+# 1. Introduction
+
+This document describes the dot files automation that is provided for Mac or Windows Users.
+
+## 1.2. Audience
+
+The audience for this document includes:
+
+* Mac/Win User who will install and configure apps on their workstation.
+
+---
+# 2. System Overview
+## 2.1. Benefits and Values
+
+1. One benefit is that you can have replicate your personal or work bash aliases and functions to multiple workstations quickly.
+
+---
+# 3. User Personas
+## 3.1 RACI Matrix
+
+|            Category            |                 Activity                  | Mac/Win User |
+|:------------------------------:|:-----------------------------------------:|:------------:|
+| Installation and Configuration | Clone the repo and edit your bash profile |     R,A      |
+| Installation and Configuration |      Install Git Bash autocompletion      |     R,A      |
+|           Execution            | Shell script `wprc.sh` for WordPress  |     R,A      |
+
+---
+# 4. Requirements
+## 4.1. Workstation
+
+1. Install `git`.
+
+---
+# 5. Installation and Configuration
+## 5.1. Clone the repo and edit your bash profile
+
+1. Clone the repository to your local workstation.
+
+```sh
+cd git
+git clone https://github.com/dennislwm/bash-alias-custom
+```
+
+2. Create a symbolic link to the `src` folder.
+
+```sh
+ln -s ~/git/bash-alias-custom/src ~/src
+```
+
+2. Open and edit your bash profile to load the startup script whenever you open a new terminal.
+
+```sh
+source ~/src/startup.sh
+```
+
+## 5.2. Install Git Bash autocompletion
 
 Run the following command:
 
@@ -32,7 +111,7 @@ For example:
 dennislwm@dbmacm3:~/fx-git-pull/02bash-alias-custom (master *=)$
 ```
 
-## Git status
+### Git status
 This will display the branch name next to the folder name in the bash prompt.
 
 Symbols after the branch name indicate additional information about the repo state:
@@ -44,7 +123,10 @@ Symbols after the branch name indicate additional information about the repo sta
 * `>` The branch is ahead of the remote branch (remote branch can be fast-forwarded)
 * `<>` The branch and remote branch have diverged (will need merge)
 
-# Shell script `wprc.sh` for WordPress
+---
+# 6. Execution
+
+**Shell script `wprc.sh` for WordPress**
 
 <details>
 	<summary>Click here to view <strong>Shell script wprc.sh for WordPress</strong>.</summary><br>
@@ -130,11 +212,10 @@ done
 
 </details>
 
-</details>
+---
+# 7. Troubleshooting
 
-# Troubleshooting
-
-## Error bash: __git_ps1: command not found
+## 7.1. Error bash: __git_ps1: command not found
 
 If you are seeing this error, this is because the `__git_ps1` function from the completion functionality was moved into a new file `git-prompt.sh`.
 
