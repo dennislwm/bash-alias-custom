@@ -10,6 +10,17 @@ alias lrli='ledger -M register ^liabilities -f'
 alias lem="ledger reg ^expenses --period-sort '(amount)' -M --begin 2022/06/01 -f Denbrige.ledger --display 'account=~/DL/' --wide"
 
 print_dates_last_12_months() {
+    local file_name="$1"
+
+    if [[ -z "$file_name" ]]; then
+        echo "Error: file_name is an empty string."
+        return 1
+    fi
+
+    if [[ ! -f "$file_name" ]]; then
+        echo "Error: file '$file_name' does not exist."
+        return 1
+    fi
     for ((i=1; i<=12; i++)); do
         # Calculate the first day of the month
         first_day=$(date -v-"$i"m -v1d +%Y-%m-01)
