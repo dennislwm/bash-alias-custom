@@ -19,6 +19,8 @@ alias dcub='DOCKER_BUILDKIT=1 docker-compose up -d --build --no-cache'
 alias dcuw='docker-compose -f docker-compose-win.yml up -d'
 alias dr='docker run'
 alias drr='docker run --rm'
+alias dlgh='docker login ghcr.io -u dennislwm --password-stdin'
+alias dp='docker push'
 
 #
 # internal aliases
@@ -39,7 +41,7 @@ dc-bash() {
     else
         echo "done"
     fi
-    
+
 }
 dc-cli() {
     cancel=true
@@ -54,7 +56,7 @@ dc-cli() {
     else
         echo "done"
     fi
-    
+
 }
 di-build() {
     cancel=true
@@ -63,6 +65,49 @@ di-build() {
         echo "dib -t $diname ."
         dib -t $diname .
         cancel=false
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+
+di-tag() {
+    cancel=true
+    echo "Creating a Docker tag..."
+    src_image=$(inp-diname)
+    if [ ! -z "$src_image" ]; then
+        read -p "Enter the new tag (name:tag): " new_tag
+        if [ ! -z "$new_tag" ]; then
+            echo "docker tag $src_image $new_tag"
+            docker tag $src_image $new_tag
+            cancel=false
+        fi
+    fi
+    if $cancel; then
+        echo "user cancel"
+    else
+        echo "done"
+    fi
+}
+
+di-pull() {
+    cancel=true
+    echo "Pulling a Docker image..."
+    image_name=$(inp-diname)
+    if [ ! -z "$image_name" ]; then
+        read -p "Enter optional platform (leave blank for default): " platform
+        if [ -z "$platform" ]; then
+            echo "docker pull $image_name"
+            docker pull $image_name
+        else
+            echo "docker pull --platform $platform $image_name"
+            docker pull --platform $platform $image_name
+        fi
+        cancel=false
+        docker image ls
+        di-tag
     fi
     if $cancel; then
         echo "user cancel"
