@@ -67,6 +67,21 @@ function check_symbolic_link {
   fi
 }
 
+function check_shell {
+  local current_shell="$SHELL"
+
+  if [[ "$current_shell" == *"/bash" ]]; then
+    echo "[OK] Using bash shell ($current_shell)"
+  elif [[ "$current_shell" == *"/zsh" ]]; then
+    echo "[WARN] Using zsh shell ($current_shell). This project is optimized for bash."
+    echo "       PS1 prompt colors may not display correctly in zsh."
+    echo "       To switch to bash: chsh -s /bin/bash"
+  else
+    echo "[WARN] Using $current_shell. This project is optimized for bash."
+    echo "       Consider switching to bash: chsh -s /bin/bash"
+  fi
+}
+
 function check_bash_profile {
   local profile_file="$HOME/.bash_profile"
   local startup_line="source ~/src/startup.sh"
@@ -123,6 +138,9 @@ function setup_bash_profile {
 
 function show_project_status {
   echo "=== Status Check ==="
+
+  # Check shell first
+  check_shell
 
   # Check required tools
   for tool_def in "${TOOLS[@]}"; do
