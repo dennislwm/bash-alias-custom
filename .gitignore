@@ -1,4 +1,5 @@
 .DS_Store
-.env
+*env*
 config/config.txt
 config/ipaddr.txt
+.aider*
