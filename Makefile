@@ -14,7 +14,7 @@ help:
 	@source ./make.sh && list_shell_scripts
 
 setup:
-	@source ./make.sh && setup_commands && setup_bash_profile
+	@source ./make.sh && setup_commands && setup_bash_profile && setup_lpass_profile "$(NOTE)"
 
 status:
 	@source ./make.sh && show_status && show_project_status

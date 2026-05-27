@@ -234,6 +234,34 @@ function setup_bash_profile {
   echo "[OK] Added startup.sh source to ~/.bash_profile"
 }
 
+function setup_lpass_profile {
+  local note="${1:-global/env}" profile="$HOME/.bash_profile" sentinel="# lpass-env-autoload"
+  if [ -f "$profile" ] && grep -qF "$sentinel" "$profile" 2>/dev/null; then
+    echo "[SKIP] lpass auto-load block already in ~/.bash_profile"
+    return 0
+  fi
+  cat >> "$profile" << EOF
+
+$sentinel
+export LPASS_AGENT_TIMEOUT=0
+if lpass status --quiet 2>/dev/null; then
+  eval "\$(lpass show --notes '$note')"
+else
+  echo "[lpass] agent not running — run 'lpass login <email>'." >&2
+fi
+EOF
+  echo "[OK]   lpass auto-load block appended to ~/.bash_profile"
+}
+
+function check_lpass_profile {
+  local profile="$HOME/.bash_profile" sentinel="# lpass-env-autoload"
+  if [ -f "$profile" ] && grep -qF "$sentinel" "$profile" 2>/dev/null; then
+    echo "[OK]   lpass auto-load block found in ~/.bash_profile"
+  else
+    echo "[WARN] lpass auto-load block not found — run: make setup"
+  fi
+}
+
 function show_project_status {
   echo "=== Status Check ==="
   check_shell
@@ -249,6 +277,7 @@ function show_project_status {
   echo -e "\n=== Project Setup ==="
   check_symbolic_link
   check_bash_profile
+  check_lpass_profile
   check_git_completion
 }
 
