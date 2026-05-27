@@ -198,13 +198,23 @@ help-ledger() {
     echo "  lrli        ledger -M register ^liabilities -f"
 }
 help-lpass() {
+    echo "lpass Aliases"
+    echo "  lpl         lpass login"
+    echo "  lpex        Load note vars into current shell"
+    echo "  lpes        Launch subshell with note vars"
+    echo ""
+    echo "lpass Admin"
+    echo "  lpaa        Create new Secure Note from stdin"
+    echo "  lpae        Merge updates into existing note"
+    echo "  lpad        Delete keys from note"
+    echo ""
+    echo "lpass Utility"
     echo "  lp          lpass"
     echo "  lpc         Edit ~/.lpass/env"
     echo "  lph         lpass --help"
     echo "  lpls        lpass ls"
     echo "  lpshn       lpass show --notes"
     echo "  lpsy        lpass sync"
-    echo "  lp-login    Interactive lpass login"
     echo "  lp_note_add Interactive lpass edit --notes"
 }
 help-ssh() {

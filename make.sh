@@ -94,13 +94,11 @@ function setup_commands {
 # This env file uses @env-spec - see https://varlock.dev/env-spec for more info
 #
 # @defaultRequired=infer @defaultSensitive=true
-# @generateTypes(lang=ts, path=env.d.ts)
 # ----------
 # @plugin(@varlock/1password-plugin@0.3.0)
 # @initOp(allowAppAuth=true)
 
-DB_PASS=op(op://Varlock/DB_PASS/password)
-DB_USER=op(op://Varlock/DB_PASS/username)
+OPENAI_API_KEY=op(op://Varlock/dennislwm/OPENAI_API_KEY)
 EOF
     echo "[OK]   Generated $dest"
   fi
