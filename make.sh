@@ -166,7 +166,7 @@ function setup_lpass_profile {
 $sentinel
 export LPASS_AGENT_TIMEOUT=0
 if lpass status --quiet 2>/dev/null; then
-  eval "\$(lpass show --notes '$note')"
+  eval "\$(lpass show --notes '$note' 2>/dev/null)"
 else
   echo "[lpass] agent not running — run 'lpass login <email>'." >&2
 fi
